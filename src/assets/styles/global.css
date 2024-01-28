@@ -1,0 +1,38 @@
+body {
+    height: 100%;
+    width: 100%;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+body[theme="dark"] {
+    color: var(--text-dark);
+    background-color: var(--background-dark);
+}
+
+body[theme="light"] {
+    color: var(--text-light);
+    background-color: var(--background-light);
+}
+
+body.modal-open {
+    overflow: hidden;
+  }
+
+#app {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+  
+  /* Optional: Disable scrollbar interaction */
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+  
+  

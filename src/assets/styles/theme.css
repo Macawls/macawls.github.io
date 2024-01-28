@@ -1,0 +1,38 @@
+:root {
+    --red: #e06c75;
+    --green: #98c379;
+    --yellow: #e5c07b;
+    --blue: #61afef;
+    --purple: #c678dd;
+    --cyan: #56b6c2;
+    --text-dark: #abb2bf;
+    --text-dark-waiting: #abb2bf53;
+    --text-light: #383a42;
+    --text-light-waiting: #383a4271;
+    
+    --background-dark: #1e222a;
+    --background-light: #e8e8ed;
+
+    --icon-default-dark: #575a5f;
+    --icon-default-light: #929292;
+
+    --icon-background-dark: #282c34;
+    --icon-background-light: #0e0d0d18;
+
+    --icon-row-border-dark: #abb2bf;
+    --icon-row-border-light: #282c34;
+
+    --emoji-dark: #282c34;
+    --emoji-light: #e3e3e3;
+
+    --toggle-circle-light: #282c34;
+    --toggle-circle-dark: #abb2bf;
+
+    --toggle-box-light: #abb2bf;
+    --toggle-box-dark: #313742;
+    
+    --text-header-dark: #dbdbdb;
+
+    --card-light: #d3d3d8;
+    --card-dark: #282c34;
+}

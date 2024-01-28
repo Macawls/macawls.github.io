@@ -1,0 +1,63 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+jobs:
+  cd:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [17]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Setup node env
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Fetch Itch.Io Data
+        run: |
+          ITCH_KEY=${{ secrets.ITCH_KEY }}
+          API_URL="https://itch.io/api/1/$ITCH_KEY/my-games"
+          OUTPUT_FILE="src/assets/data/games.json"
+
+          # Create directory
+          mkdir -p $(dirname $OUTPUT_FILE)
+
+          # Make request
+          response=$(curl -s -w "%{http_code}" -H "Authorization: Bearer $ITCH_KEY" $API_URL)
+
+          # Check status
+          if [[ $response == *"200"* ]]; then
+            data=$(echo "${response}" | sed -e 's/200//')
+            echo "Data:\n$data"
+
+            # Save to file
+            echo "$data" > $OUTPUT_FILE
+          else
+            echo "Failed to fetch data from itch.io, $response"
+            exit 1
+          fi
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.9.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
